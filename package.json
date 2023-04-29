@@ -1,0 +1,11 @@
+{
+  "name": "sweep-api",
+  "version": "1.0.0",
+  "description": "API to seek for informations about movies & series",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm index.js"
+  },
+  "author": "Theo BOURDIER",
+  "license": "MIT"
+}
