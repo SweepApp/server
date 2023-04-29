@@ -25,6 +25,10 @@ try {
 
 let db = conn.db(process.env.MONGODB);
 
+app.get('/', (req, res) => {
+  res.send("<div style='text-align:center'><a href='/movies'>MOVIES</a> / <a href='/tv'>SERIES</a></div>");
+})
+
 app.get("/movies", async (req, res) => {
   let movies = await db.collection("movies");
   let results = await movies.find({})
