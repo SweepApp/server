@@ -8,7 +8,6 @@ const dbName = "sweep";
 
 async function main() {
   const client = new MongoClient(dbUrl);
-
   try {
     await client.connect();
     await client.db(dbName).command({ ping: 1 });
