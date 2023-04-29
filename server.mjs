@@ -40,7 +40,7 @@ app.get("/movies", async (req, res) => {
 
 app.get("/movies/:id", async (req, res) => {;
   let movies = await db.collection("movies");
-  let query = {id: JSON.parse(req.params.id)};
+  let query = {id: req.params.id};
   let result = await movies.findOne(query);
 
   if (!result) res.send("Not found").status(404);
