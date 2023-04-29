@@ -4,16 +4,21 @@ const { MongoClient } = require("mongodb");
 const app = express();
 const appPort = 8080;
 const dbUrl = `mongodb+srv://tb:${process.env.MONGODB_PASS}@sweep-api.7o5uwy1.mongodb.net/?retryWrites=true&w=majority`;
-const dbName = "sweep";
 
 async function main() {
   const client = new MongoClient(dbUrl);
+  const db = client.db("sweep");
+  const movies = db.collection("movies");
+
   try {
-    await client.connect();
-    await client.db(dbName).command({ ping: 1 });
-    console.log("You successfully connected to MongoDB!");
-  } catch (e) {
-    console.error(e);
+    const cursor = movies.find();
+
+    if ((await movies.countDocuments()) === 0) {
+      console.log("No documents found!");
+    }
+
+    await cursor.forEach(console.dir);
+
   } finally {
     await client.close();
   }
