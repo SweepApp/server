@@ -4,7 +4,7 @@
   "description": "API to seek for informations about movies & series",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "Theo BOURDIER",
   "license": "MIT",

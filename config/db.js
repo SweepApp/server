@@ -1,11 +1,8 @@
-const express = require("express");
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const app = express();
-const appPort = 8080;
 const dbUrl = process.env.MONGODB;
 
-async function main() {
+const connectDB = async () => {
   const client = new MongoClient(dbUrl);
   const db = client.db("sweep");
   const movies = db.collection("movies");
@@ -28,8 +25,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
-
-app.listen(appPort, () => {
-  console.log(`Server listening on port ${appPort}`);
-});
+module.exports = connectDB;
