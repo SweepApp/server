@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const port = 8080;
-const connectDb = require("./config/db");
+const connectDB = require("./config/db");
 
-connectDb();
+connectDB();
 
 app.listen(port, () => {
   console.log(`🚀 Web server listening on port ${port}`);
