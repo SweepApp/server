@@ -1,6 +1,7 @@
 import express from "express";
 import { MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
+import open from "open";
 dotenv.config();
 const app = express();
 const port = 8080;
@@ -63,4 +64,5 @@ app.get("/tv/:id", async (req, res) => {;
 
 app.listen(port, () => {
   console.log(`🚀 Web server listening on port ${port}`);
+  open(`http://localhost:${port}`)
 });
