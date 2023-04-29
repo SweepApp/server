@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const app = express();
 const appPort = 8080;
 const dbUrl = `mongodb+srv://tb:${process.env.MONGODB_PASS}@sweep-api.7o5uwy1.mongodb.net/?retryWrites=true&w=majority`;
