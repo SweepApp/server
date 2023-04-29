@@ -12,7 +12,8 @@ To use this API, you will need the following:
 
 * Node.js (v14 or higher)
 * MongoDB database
-* Movies & TV series datasets
+* [Movies dataset](https://www.kaggle.com/datasets/akshaypawar7/millions-of-movies)
+* [TV dataset](https://developers.themoviedb.org/3/getting-started/daily-file-exports)
 
 ## Installation
 
