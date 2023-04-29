@@ -2,6 +2,8 @@ require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const dbUrl = process.env.MONGODB;
 
+const getAllTitles = require("./title");
+
 const connectDB = async () => {
   const client = new MongoClient(dbUrl);
   const db = client.db("sweep");
@@ -9,6 +11,8 @@ const connectDB = async () => {
   const tv = db.collection("tv");
 
   console.log("🌿 Connected to MongoDB");
+
+  getAllTitles(movies);
 
   try {
     if ((await movies.countDocuments()) === 0) {
@@ -25,6 +29,6 @@ const connectDB = async () => {
   } finally {
     await client.close();
   }
-}
+};
 
 module.exports = connectDB;
