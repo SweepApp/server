@@ -7,5 +7,8 @@
     "start": "npm index.js"
   },
   "author": "Theo BOURDIER",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
