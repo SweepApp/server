@@ -35,7 +35,7 @@ app.get("/movies", async (req, res) => {
 
 app.get("/movies/:id", async (req, res) => {;
   let movies = await db.collection("movies");
-  let query = {_id: new ObjectId(req.params.id)};
+  let query = {id: JSON.parse(req.params.id)};
   let result = await movies.findOne(query);
 
   if (!result) res.send("Not found").status(404);
@@ -53,7 +53,7 @@ app.get("/tv", async (req, res) => {
 
 app.get("/tv/:id", async (req, res) => {;
   let tv = await db.collection("tv");
-  let query = {_id: new ObjectId(req.params.id)};
+  let query = {id: JSON.parse(req.params.id)};
   let result = await tv.findOne(query);
 
   if (!result) res.send("Not found").status(404);
