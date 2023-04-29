@@ -25,8 +25,8 @@ try {
 let db = conn.db(process.env.MONGODB);
 
 app.get("/movies", async (req, res) => {
-  let collection = await db.collection("movies");
-  let results = await collection.find({})
+  let movies = await db.collection("movies");
+  let results = await movies.find({})
     .limit(500)
     .toArray();
 
