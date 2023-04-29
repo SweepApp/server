@@ -9,6 +9,7 @@
   "author": "Theo BOURDIER",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongodb": "^5.3.0"
   }
