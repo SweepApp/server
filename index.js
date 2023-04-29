@@ -14,7 +14,7 @@ async function main() {
     const cursor = movies.find();
 
     if ((await movies.countDocuments()) === 0) {
-      console.log("No documents found!");
+      console.log("No data found!");
     }
 
     await cursor.forEach(console.dir);
