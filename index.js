@@ -12,6 +12,6 @@ MongoClient.connect(dbUrl, function(err, client) {
 });
 
 app.listen(appPort, () => {
-  console.log(`Server listening on port ${port}`)
+  console.log(`Server listening on port ${appPort}`)
 })
 
