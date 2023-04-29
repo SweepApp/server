@@ -9,15 +9,20 @@ async function main() {
   const client = new MongoClient(dbUrl);
   const db = client.db("sweep");
   const movies = db.collection("movies");
+  const tv = db.collection("tv");
 
   try {
-    const cursor = movies.find();
-
     if ((await movies.countDocuments()) === 0) {
-      console.log("No data found!");
+      console.log("No movies found!");
+    } else {
+      console.log(`${await movies.countDocuments({})} movies found!`)
     }
 
-    await cursor.forEach(console.dir);
+    if ((await tv.countDocuments()) === 0) {
+      console.log("No TV series found!");
+    } else {
+      console.log(`${await tv.countDocuments({})} TV series found!`)
+    }
 
   } finally {
     await client.close();
