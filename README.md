@@ -19,7 +19,7 @@ To use this API, you will need the following:
 1. Clone the repository:
 
 ```
-git clone https://github.com/Sweepii/sweep-api.git
+git clone https://github.com/SweepApp/sweep-api.git
 ```
 
 2. Install dependencies:
