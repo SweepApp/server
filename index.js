@@ -6,7 +6,7 @@ const dbUrl = 'mongodb://localhost:27017';
 const dbName = 'Sweep';
 
 MongoClient.connect(dbUrl, function(err, client) {
-  console.log("Connecté à MongoDB");
+  console.log("Connected to MongoDB");
   const db = client.db(dbName);
   client.close();
 });
