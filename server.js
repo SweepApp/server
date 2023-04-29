@@ -6,5 +6,5 @@ const connectDb = require("./config/db");
 connectDb();
 
 app.listen(port, () => {
-  console.log(`🚀 Server listening on port ${port}`);
+  console.log(`🚀 Web server listening on port ${port}`);
 });
