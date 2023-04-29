@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.mjs"
   },
   "author": "Theo BOURDIER <theobourdier1@gmail.com>",
   "license": "MIT",
