@@ -34,6 +34,7 @@ try {
 let db = conn.db(process.env.MONGODB);
 let movies = db.collection("movies");
 let tv = db.collection("tv");
+let pageLimit = 20;
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -52,8 +53,9 @@ app.get("/", (req, res) => {
 app.get("/movies", async (req, res) => {
   let apiQuery = req.query.api_key;
   if (apiQuery === process.env.API_KEY) {
+    let pageQuery = req.query.page;
     if (req.query.id === undefined) {
-      let data = await movies.find({}).limit(20).toArray();
+      let data = await movies.find({}).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
       res.send(data).status(200);
     } else {
       let id = { id: req.query.id };
@@ -73,8 +75,9 @@ app.get("/movies", async (req, res) => {
 app.get("/tv", async (req, res) => {
   let apiQuery = req.query.api_key;
   if (apiQuery === process.env.API_KEY) {
+    let pageQuery = req.query.page;
     if (req.query.id === undefined) {
-      let data = await tv.find({}).limit(20).toArray();
+      let data = await tv.find({}).limit(20).skip(pageLimit * pageQuery).toArray();
       res.send(data).status(200);
     } else {
       let id = { id: JSON.parse(req.query.id) };
