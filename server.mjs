@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 app.get("/movies", async (req, res) => {
   let movies = db.collection("movies");
   let results = await movies.find({})
-    .limit(500)
+    .limit(20)
     .toArray();
 
   res.send(results).status(200);
