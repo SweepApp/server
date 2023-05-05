@@ -53,10 +53,17 @@ app.get("/", (req, res) => {
 app.get("/movies", async (req, res) => {
   let apiQuery = req.query.api_key;
   if (apiQuery === process.env.API_KEY) {
-    let pageQuery = req.query.page;
+    let noteQuery = req.query.note;
     if (req.query.id === undefined) {
-      let data = await movies.find({}).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
-      res.send(data).status(200);
+      let pageQuery = req.query.page;
+      if (noteQuery) {
+        let note = { vote_average: { $gte: req.query.note} };
+        let data = await movies.find(note).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
+        res.send(data).status(200);
+      } else {
+        let data = await movies.find({}).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
+        res.send(data).status(200);
+      }
     } else {
       let id = { id: req.query.id };
       let data = await movies.findOne(id);
@@ -75,10 +82,17 @@ app.get("/movies", async (req, res) => {
 app.get("/tv", async (req, res) => {
   let apiQuery = req.query.api_key;
   if (apiQuery === process.env.API_KEY) {
-    let pageQuery = req.query.page;
+    let noteQuery = req.query.note;
     if (req.query.id === undefined) {
-      let data = await tv.find({}).limit(20).skip(pageLimit * pageQuery).toArray();
-      res.send(data).status(200);
+      let pageQuery = req.query.page;
+      if (noteQuery) {
+        let note = { popularity: { $gte: req.query.note} };
+        let data = await tv.find(note).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
+        res.send(data).status(200);
+      } else {
+        let data = await tv.find({}).limit(pageLimit).skip(pageLimit * pageQuery).toArray();
+        res.send(data).status(200);
+      }
     } else {
       let id = { id: JSON.parse(req.query.id) };
       let data = await tv.findOne(id);
