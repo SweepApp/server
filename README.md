@@ -1,10 +1,6 @@
 # Sweep's API
 
-This technical documentation outlines the usage and implementation of Sweep API built using Express.js and MongoDB.
-
-## Introduction
-
-This API provides a simple way to retrieve information about movies and TV shows. It retrieves data from a MongoDB database using the MongoDB driver for Node.js.
+This code sets up a web server using the Express framework to handle requests for movie and TV show data. The data is stored in a MongoDB database, and the server uses the MongoClient library to connect to the database. The server responds to GET requests on the `/movies` and `/tv` routes with either a list of movies or TV shows, or a single movie or TV show object, depending on the presence of the `id` query parameter.
 
 ## Prerequisites
 
@@ -34,12 +30,31 @@ npm install
 ```
 MONGODB_URL=<your_mongodb_connection_url>
 MONGODB=<your_database_name>
+API_KEY=<your_desired_api_key>
 ```
 
-4. Start the API server:
+4. Start the server:
 
 ```
 node server.mjs
 ```
 
 The server will start listening on port `8080`.
+
+## API Endpoints
+
+### `GET /movies` / `GET /tv`
+
+This endpoint returns an array of movie documents from the database. Clients can optionally provide a movie ID in the query string to retrieve a single movie document.
+
+#### Query Parameters
+
+`api_key`: A required parameter that clients must provide with a valid API key.
+`id`: An optional parameter that clients can provide to retrieve a single movie document by ID.
+
+#### Response
+
+- If the API key is invalid, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid API key: You must be granted a valid key.".
+- If the id query parameter is not provided, the server will respond with a 200 status code and an array of movie documents.
+- If the id query parameter is provided but the movie document is not found in the database, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid ID: What you are looking for doesn't exist.".
+- If the id query parameter is provided and the movie document is found in the database, the server will respond with a 200 status code and the movie document.
