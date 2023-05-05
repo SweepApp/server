@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 })
 
 app.get("/movies", async (req, res) => {
-  let movies = await db.collection("movies");
+  let movies = db.collection("movies");
   let results = await movies.find({})
     .limit(500)
     .toArray();
@@ -39,7 +39,7 @@ app.get("/movies", async (req, res) => {
 });
 
 app.get("/movies/:id", async (req, res) => {;
-  let movies = await db.collection("movies");
+  let movies = db.collection("movies");
   let query = {id: req.params.id};
   let result = await movies.findOne(query);
 
@@ -48,7 +48,7 @@ app.get("/movies/:id", async (req, res) => {;
 });
 
 app.get("/tv", async (req, res) => {
-  let tv = await db.collection("tv");
+  let tv = db.collection("tv");
   let results = await tv.find({})
     .limit(500)
     .toArray();
@@ -57,7 +57,7 @@ app.get("/tv", async (req, res) => {
 });
 
 app.get("/tv/:id", async (req, res) => {;
-  let tv = await db.collection("tv");
+  let tv = db.collection("tv");
   let query = {id: JSON.parse(req.params.id)};
   let result = await tv.findOne(query);
 
