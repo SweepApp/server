@@ -49,12 +49,12 @@ This endpoint returns an array of movie documents from the database. Clients can
 
 #### Query Parameters
 
-`api_key`: A required parameter that clients must provide with a valid API key.
-`id`: An optional parameter that clients can provide to retrieve a single movie document by ID.
+* `api_key`: A required parameter that clients must provide with a valid API key.
+* `id`: An optional parameter that clients can provide to retrieve a single movie document by ID.
 
 #### Response
 
-- If the API key is invalid, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid API key: You must be granted a valid key.".
-- If the id query parameter is not provided, the server will respond with a 200 status code and an array of movie documents.
-- If the id query parameter is provided but the movie document is not found in the database, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid ID: What you are looking for doesn't exist.".
-- If the id query parameter is provided and the movie document is found in the database, the server will respond with a 200 status code and the movie document.
+* If the API key is invalid, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid API key: You must be granted a valid key.".
+* If the id query parameter is not provided, the server will respond with a 200 status code and an array of movie documents.
+* If the id query parameter is provided but the movie document is not found in the database, the server will respond with a 404 status code and a JSON object with the status property set to "Invalid ID: What you are looking for doesn't exist.".
+* If the id query parameter is provided and the movie document is found in the database, the server will respond with a 200 status code and the movie document.
