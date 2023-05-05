@@ -16,6 +16,7 @@ try {
   const movies = db.collection("movies");
   const tv = db.collection("tv");
 
+  console.clear();
   console.log('🌿 MongoDB connected!')
   console.log(`🍿 ${await movies.countDocuments({})} movies & ${await tv.countDocuments({})} TV series found!`);
 
