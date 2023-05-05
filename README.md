@@ -51,6 +51,16 @@ This endpoint returns an array of movie documents from the database. Clients can
 
 * `api_key`: A required parameter that clients must provide with a valid API key.
 * `id`: An optional parameter that clients can provide to retrieve a single movie document by ID.
+* `page`: An optional parameter that clients can provide to retrieve anothers pages.
+* `note`: An optional parameter that clients can provide to retrieve documents who have a note greater or equal than `x` (only for `/movies`)
+* `popularity`: An optional parameter that clients can provide to retrieve documents who have a popularity greater or equal than `x` (only for `/tv`)
+
+##### Example 
+
+You can find movies with a score of 8 or more on the 3rd page.
+```
+http://localhost:8080/movies?api_key=<api_key>&note=8&page=3
+```
 
 #### Response
 
