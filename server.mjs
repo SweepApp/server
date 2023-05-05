@@ -48,31 +48,41 @@ app.get("/", (req, res) => {
 
 // movies
 app.get("/movies", async (req, res) => {
-  let results = await movies.find({}).limit(20).toArray();
-  res.send(results).status(200);
+  let apiQuery = req.query.api_key;
+  if (apiQuery === process.env.API_KEY) {
+    let results = await movies.find({}).limit(20).toArray();
+    res.send(results).status(200);
+  } else {
+    res.send({ status: "Invalid API key: You must be granted a valid key."}).status(404);
+  }
 });
 
-app.get("/movies/filter", async (req, res) => {
-  let query = { id: req.query.id };
-  let result = await movies.findOne(query);
+// app.get("/movies/filter", async (req, res) => {
+//   let query = { id: req.query.id };
+//   let result = await movies.findOne(query);
 
-  if (!result) res.send("Not found").status(404);
-  res.send(result).status(200);
-});
+//   if (!result) res.send("Not found").status(404);
+//   res.send(result).status(200);
+// });
 
 // tv
 app.get("/tv", async (req, res) => {
-  let results = await tv.find({}).limit(500).toArray();
-  res.send(results).status(200);
+  let apiQuery = req.query.api_key;
+  if (apiQuery === process.env.API_KEY) {
+    let results = await tv.find({}).limit(20).toArray();
+    res.send(results).status(200);
+  } else {
+    res.send({ status: "Invalid API key: You must be granted a valid key."}).status(404);
+  }
 });
 
-app.get("/tv/filter", async (req, res) => {
-  let query = { id: JSON.parse(req.query.id) };
-  let result = await tv.findOne(query);
+// app.get("/tv/filter", async (req, res) => {
+//   let query = { id: JSON.parse(req.query.id) };
+//   let result = await tv.findOne(query);
 
-  if (!result) res.send("Not found").status(404);
-  else res.send(result).status(200);
-});
+//   if (!result) res.send("Not found").status(404);
+//   else res.send(result).status(200);
+// });
 
 app.listen(port, () => {
   console.log(`🚀 Web server listening on port ${port}`);
