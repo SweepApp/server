@@ -1,5 +1,9 @@
 import express from "express";
 import { MongoClient, ObjectId } from "mongodb";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import dotenv from "dotenv";
 import open from "open";
 dotenv.config();
@@ -41,9 +45,7 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send(
-    "<div style='text-align:center'><a href='/movies'>MOVIES</a> / <a href='/tv'>SERIES</a></div>"
-  );
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 // movies

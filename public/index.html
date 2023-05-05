@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweep API</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500&family=Roboto+Mono:wght@500&display=swap");
+
+      html {
+        background: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      body {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      h1 {
+        margin: 10px;
+        font-family: "Roboto Mono", monospace;
+        font-size: 38px;
+      }
+
+      h2,
+      h3 {
+        margin: 0 0 10px 0;
+        font-size: 26px;
+        font-weight: 500;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 25px 50px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 0.25rem;
+        font-size: 18px;
+        font-family: "Alegreya Sans", sans-serif;
+      }
+
+      ul {
+        display: flex;
+        gap: 16px;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 0 25px;
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.75);
+        background-color: #eee;
+        border: 1px solid #ddd;
+      }
+
+      button:hover {
+        background-color: #ddd;
+        border: 1px solid #ccc;
+        color: #000;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .form label {
+        margin-bottom: 5px;
+      }
+
+      .form input {
+        border-radius: 0.25rem;
+        border: 1px solid #aaa;
+      }
+
+      hr {
+        border: 1px solid #eee;
+        width: 100%;
+      }
+
+      #error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 0 1.25rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sweep API</h1>
+    <main>
+      <h2>Login</h2>
+      <div id="error" class="hide">
+        <p>You must enter an API key</p>
+      </div>
+      <div class="form">
+        <label for="pass">API key:</label>
+        <input type="password" id="pass" name="password" />
+      </div>
+      <h3>Connect to</h3>
+      <ul>
+        <li><button id="movies">Movies</button></li>
+        <li><button id="tv">Series</button></li>
+      </ul>
+    </main>
+
+    <script>
+      let movies = document.getElementById("movies");
+      let tv = document.getElementById("tv");
+
+      movies.addEventListener("click", () => {
+        let key = document.getElementById("pass").value;
+        if (!key) {
+          document.getElementById("error").classList.remove("hide");
+        } else {
+          window.location = "/movies?api_key=" + key;
+        }
+      });
+
+      tv.addEventListener("click", () => {
+        let key = document.getElementById("pass").value;
+        if (!key) {
+          document.getElementById("error").classList.remove("hide");
+        } else {
+          window.location = "/tv?api_key=" + key;
+        }
+      });
+    </script>
+  </body>
+</html>
