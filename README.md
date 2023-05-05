@@ -43,7 +43,7 @@ The server will start listening on port `8080`.
 
 ## API Endpoints
 
-### `GET /movies` / `GET /tv`
+### `GET /movies` & `GET /tv`
 
 This endpoint returns an array of movie documents from the database. Clients can optionally provide a movie ID in the query string to retrieve a single movie document.
 
