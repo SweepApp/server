@@ -1,7 +1,8 @@
 import express from "express";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import path from "path";
 import { fileURLToPath } from 'url';
+import logSymbols from "log-symbols";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import dotenv from "dotenv";
@@ -18,12 +19,12 @@ try {
   conn = await client.connect();
   const db = client.db(process.env.MONGODB);
   const movies = db.collection("movies");
-  const tv = db.collection("tv");
+  const tv = db.collection("tvs");
 
   console.clear();
-  console.log("🌿 MongoDB connected!");
+  console.log(logSymbols.success, "Connected to MongoDB");
   console.log(
-    `🍿 ${await movies.countDocuments({})} movies & ${await tv.countDocuments(
+    `${logSymbols.info} ${await movies.countDocuments({})} movies & ${await tv.countDocuments(
       {}
     )} TV series found!`
   );
@@ -33,7 +34,7 @@ try {
 
 let db = conn.db(process.env.MONGODB);
 let movies = db.collection("movies");
-let tv = db.collection("tv");
+let tv = db.collection("tvs");
 let pageLimit = 20;
 
 app.use(function (req, res, next) {
@@ -109,6 +110,6 @@ app.get("/tv", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Web server listening on port ${port}`);
+  console.log(`${logSymbols.success} Web server listening on port ${port}`);
   open(`http://localhost:${port}`);
 });
