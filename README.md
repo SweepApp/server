@@ -9,25 +9,25 @@ To use this API, you will need the following:
 * Node.js (v14 or higher)
 * MongoDB database
 * [Movies dataset](https://www.kaggle.com/datasets/akshaypawar7/millions-of-movies)
-* [TV dataset](https://developers.themoviedb.org/3/getting-started/daily-file-exports)
+* [TV dataset](https://www.kaggle.com/datasets/bourdier/all-tv-series-details-dataset)
 
 ## Installation
 
 1. Clone the repository:
 
-```
+```bash
 git clone https://github.com/SweepApp/sweep-api.git
 ```
 
 2. Install dependencies:
 
-```
+```bash
 npm install
 ```
 
 3. Create a .env file in the root directory of the project and set the MONGODB_URL and MONGODB environment variables to your MongoDB connection URL and database name respectively.
 
-```
+```bash
 MONGODB_URL=<your_mongodb_connection_url>
 MONGODB=<your_database_name>
 API_KEY=<your_desired_api_key>
@@ -35,7 +35,7 @@ API_KEY=<your_desired_api_key>
 
 4. Start the server:
 
-```
+```bash
 node server.mjs
 ```
 
