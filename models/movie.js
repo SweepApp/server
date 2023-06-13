@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
   id: Number,
@@ -48,4 +48,4 @@ const movieSchema = new mongoose.Schema({
   adult: Boolean
 });
 
-export const Movie = mongoose.model('Movie', movieSchema);
+module.exports.Movie = mongoose.model('Movie', movieSchema);

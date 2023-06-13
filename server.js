@@ -1,47 +1,49 @@
-import express from "express";
-import mongoose from "mongoose";
-import path from "path";
-import { fileURLToPath } from "url";
-import logSymbols from "log-symbols";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-import "dotenv/config";
-import open from "open";
-const app = express();
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const swaggerUi = require('swagger-ui-express')
+const cors = require("cors");
+const yaml = require('yamljs')
+const swaggerDocs = yaml.load('./swagger.yaml')
+const userRoutes = require("./routes/userRoutes.js");
+dotenv.config();
+
 const port = 8080;
-import { TV } from "./models/tv.js";
-import { Movie } from "./models/movie.js";
+const app = express();
+
+const { TV } = require("./models/tv.js");
+const { Movie } = require("./models/movie.js");
 
 const database = process.env.MONGODB_URL;
 
 try {
   mongoose
-  .connect(database, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(async () => {
-    console.log(logSymbols.success, "Connected to MongoDB");
-    console.log(logSymbols.info, `${await Movie.countDocuments()} movies & ${await TV.countDocuments()} TV series found!`);
-  })
+    .connect(database, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(async () => {
+      console.log("Connected to MongoDB");
+      console.log(
+        `${await Movie.countDocuments()} movies & ${await TV.countDocuments()} TV series found!`
+      );
+    });
 } catch (e) {
   console.error(e);
 }
 
+app.use(cors());
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.use('/', express.static('public'));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.use("/api/v1/user", userRoutes);
+
 let pageLimit = 20;
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
 
 app.get("/movies", async (req, res) => {
   let apiQuery = req.query.api_key;
@@ -50,11 +52,17 @@ app.get("/movies", async (req, res) => {
     if (req.query.id === undefined) {
       let pageQuery = req.query.page;
       if (noteQuery) {
-        let note = { vote_average: { $gte: req.query.note} };
-        let data = await Movie.find(note).limit(pageLimit).skip(pageLimit * pageQuery).exec();
+        let note = { vote_average: { $gte: req.query.note } };
+        let data = await Movie.find(note)
+          .limit(pageLimit)
+          .skip(pageLimit * pageQuery)
+          .exec();
         res.send(data).status(200);
       } else {
-        let data = await Movie.find({}).limit(pageLimit).skip(pageLimit * pageQuery).exec();
+        let data = await Movie.find({})
+          .limit(pageLimit)
+          .skip(pageLimit * pageQuery)
+          .exec();
         res.send(data).status(200);
       }
     } else {
@@ -62,13 +70,17 @@ app.get("/movies", async (req, res) => {
       let data = await Movie.findOne(id);
 
       if (data === null) {
-        res.send({ status: "Invalid ID: What you are looking for doesn't exist."}).status(404);
+        res
+          .send({ status: "Invalid ID: What you are looking for doesn't exist." })
+          .status(404);
       } else {
         res.send(data).status(200);
       }
     }
   } else {
-    res.send({ status: "Invalid API key: You must be granted a valid key."}).status(404);
+    res
+      .send({ status: "Invalid API key: You must be granted a valid key." })
+      .status(404);
   }
 });
 
@@ -80,15 +92,13 @@ app.get("/tv", async (req, res) => {
       let pageQuery = req.query.page;
       if (noteQuery) {
         let note = { popularity: { $gte: req.query.note } };
-        let data = await TV
-          .find(note)
+        let data = await TV.find(note)
           .limit(pageLimit)
           .skip(pageLimit * pageQuery)
           .exec();
         res.send(data).status(200);
       } else {
-        let data = await TV
-          .find({})
+        let data = await TV.find({})
           .limit(pageLimit)
           .skip(pageLimit * pageQuery)
           .exec();
@@ -100,9 +110,7 @@ app.get("/tv", async (req, res) => {
 
       if (data === null) {
         res
-          .send({
-            status: "Invalid ID: What you are looking for doesn't exist.",
-          })
+          .send({ status: "Invalid ID: What you are looking for doesn't exist." })
           .status(404);
       } else {
         res.send(data).status(200);
@@ -116,6 +124,5 @@ app.get("/tv", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`${logSymbols.success} Web server listening on port ${port}`);
-  open(`http://localhost:${port}`);
+  console.log(`Web server listening on port ${port}`);
 });

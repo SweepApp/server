@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const tvSchema = new mongoose.Schema({
   id: Number,
@@ -42,4 +42,4 @@ const tvSchema = new mongoose.Schema({
   popularity: Number
 });
 
-export const TV = mongoose.model('TV', tvSchema);
+module.exports.TV = mongoose.model('TV', tvSchema);
