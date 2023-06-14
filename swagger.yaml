@@ -138,9 +138,9 @@ definitions:
         description: user password
   Login:
     properties:
-      email:
+      username:
         type: string
-        description: user email
+        description: user name
       password:
         type: string
         description: user password
@@ -163,8 +163,12 @@ definitions:
     properties:
       token:
         type: string
+      email:
+        type: string
   UserProfile:
     type: object
     properties:
       username:
+        type: string
+      email:
         type: string
