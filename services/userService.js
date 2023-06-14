@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 module.exports.createUser = async serviceData => {
   console.log(serviceData);
   try {
-    const user = await User.findOne({ email: serviceData.email });
+    const user = await User.findOne({ username: serviceData.username }) || await User.findOne({ email: serviceData.email });
     if (user) {
-      throw new Error('Email already exists');
+      throw new Error('User already exists');
     }
 
     const hashPassword = await bcrypt.hash(serviceData.password, 12);
@@ -16,6 +16,7 @@ module.exports.createUser = async serviceData => {
       email: serviceData.email,
       password: hashPassword,
       username: serviceData.username,
+      avatar: serviceData.avatar,
     });
 
     console.log(newUser);
