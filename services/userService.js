@@ -65,7 +65,10 @@ module.exports.loginUser = async serviceData => {
       { expiresIn: '1d' }
     );
 
-    return { token };
+    const email = user.email;
+    const avatar = user.avatar;
+
+    return { token, email, avatar };
   } catch (error) {
     console.error('Error in userService.js', error);
     throw new Error(error);
