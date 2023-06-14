@@ -86,6 +86,9 @@ module.exports.updateUserProfile = async serviceData => {
         username: serviceData.body.username,
         email: serviceData.body.email,
         avatar: serviceData.body.avatar,
+        matches: serviceData.body.matches,
+        history: serviceData.body.history,
+        friends: serviceData.body.friends,
       },
       { new: true }
     );
