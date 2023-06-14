@@ -25,10 +25,4 @@ router.get(
   userController.getUserProfile
 )
 
-router.delete(
-  '/profile/friends',
-  tokenValidation.validateToken,
-  userController.removeFriend
-)
-
 module.exports = router
