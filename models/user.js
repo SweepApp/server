@@ -6,6 +6,21 @@ const userSchema = new mongoose.Schema(
     password: String,
     username: String,
     avatar: String,
+    matches: Number,
+    history: [
+      {
+        matchId: String,
+        result: String,
+        date: Date
+      }
+    ],
+    friends: [
+      {
+        friendId: String,
+        friendName: String,
+        friendAvatar: String
+      }
+    ]
   },
   {
     timestamps: true,
