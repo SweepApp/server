@@ -67,3 +67,20 @@ module.exports.updateUserProfile = async (req, res) => {
 
   return res.status(response.status).send(response)
 }
+
+module.exports.addFriend = async (req, res) => {
+  let response = {}
+
+  try {
+    const responseFromService = await userService.addFriend(req)
+    response.status = 200
+    response.message = 'Successfully added friend'
+    response.body = responseFromService
+  } catch (error) {
+    console.log('Error in addFriend - userController.js')
+    response.status = 400
+    response.message = error.message
+  }
+
+  return res.status(response.status).send(response)
+}
