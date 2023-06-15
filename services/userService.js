@@ -17,6 +17,7 @@ module.exports.createUser = async serviceData => {
       password: hashPassword,
       username: serviceData.username,
       avatar: serviceData.avatar,
+      friends: serviceData.body.friends,
     });
 
     console.log(newUser);
