@@ -25,10 +25,4 @@ router.get(
   userController.getUserProfile
 )
 
-router.post(
-  '/friend',
-  tokenValidation.validateToken,
-  userController.addFriend
-)
-
 module.exports = router

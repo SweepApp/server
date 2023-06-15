@@ -17,7 +17,6 @@ module.exports.createUser = async serviceData => {
       password: hashPassword,
       username: serviceData.username,
       avatar: serviceData.avatar,
-      friends: serviceData.body.friends,
     });
 
     console.log(newUser);
@@ -69,9 +68,8 @@ module.exports.loginUser = async serviceData => {
 
     const email = user.email;
     const avatar = user.avatar;
-    const friends = user.friends;
 
-    return { token, email, avatar, friends };
+    return { token, email, avatar };
   } catch (error) {
     console.error('Error in userService.js', error);
     throw new Error(error);
@@ -90,7 +88,6 @@ module.exports.updateUserProfile = async serviceData => {
         avatar: serviceData.body.avatar,
         matches: serviceData.body.matches,
         history: serviceData.body.history,
-        friends: serviceData.body.friends,
       },
       { new: true }
     );
