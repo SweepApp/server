@@ -68,8 +68,9 @@ module.exports.loginUser = async serviceData => {
 
     const email = user.email;
     const avatar = user.avatar;
+    const friends = user.friends;
 
-    return { token, email, avatar };
+    return { token, email, avatar, friends };
   } catch (error) {
     console.error('Error in userService.js', error);
     throw new Error(error);
@@ -103,45 +104,3 @@ module.exports.updateUserProfile = async serviceData => {
     throw new Error(error);
   }
 };
-
-module.exports.addFriend = async serviceData => {
-  try {
-    const jwtToken = serviceData.headers.authorization.split('Bearer')[1].trim();
-    const decodedJwtToken = jwt.decode(jwtToken);
-    const user = await User.findOneAndUpdate(
-      { _id: decodedJwtToken.id },
-      { $push: { friends: serviceData.body.friend } },
-      { new: true }
-    );
-
-    if (!user) {
-      throw new Error('User not found!');
-    }
-
-    return user.toObject();
-  } catch (error) {
-    console.error('Error in userService.js', error);
-    throw new Error(error);
-  }
-}
-
-module.exports.removeFriend = async serviceData => {
-  try {
-    const jwtToken = serviceData.headers.authorization.split('Bearer')[1].trim();
-    const decodedJwtToken = jwt.decode(jwtToken);
-    const user = await User.findOneAndUpdate(
-      { _id: decodedJwtToken.id },
-      { $pull: { friends: serviceData.body.friend } },
-      { new: true }
-    );
-
-    if (!user) {
-      throw new Error('User not found!');
-    }
-
-    return user.toObject();
-  } catch (error) {
-    console.error('Error in userService.js', error);
-    throw new Error(error);
-  }
-}
